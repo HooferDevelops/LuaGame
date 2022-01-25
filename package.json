@@ -1,0 +1,27 @@
+{
+  "name": "lua-game",
+  "version": "1.0.0",
+  "description": "Web-based Lua engine -- built using PixiJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HooferDevelops/LuaGame.git"
+  },
+  "keywords": [
+    "Lua",
+    "Fengari",
+    "Engine"
+  ],
+  "author": "Hoofer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HooferDevelops/LuaGame/issues"
+  },
+  "homepage": "https://github.com/HooferDevelops/LuaGame#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
