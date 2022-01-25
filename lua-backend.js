@@ -3,21 +3,18 @@ const lua      = fengari.lua;
 const lauxlib  = fengari.lauxlib;
 const lualib   = fengari.lualib;
 
-const L = lauxlib.luaL_newstate();
+// create a new lua state
+const L = lua.luaL_newstate();
 
-lualib.luaL_openlibs(L);
+// create a global lua variable with the default value of a string saying test
+lua.lua_pushstring(L, "test");
+lua.lua_setglobal(L, "test");
 
-lua.lua_pushstring(L, "100");
-lua.lua_setglobal(L, "gvar");
+// load a lua string
+lua.luaL_loadstring(L, "print(test)");
 
-lauxlib.luaL_loadstring(L, "print(1)")
-
-let result = lua.lua_pcall(L, 0, 0, 0);
-
-if (result != 0) {
-  console.log(new TextDecoder().decode(lua.lua_tostring(L, -1)))
+// run the lua string and check if it errored
+if (lua.lua_pcall(L, 0, 0, 0) !== 0) {
+  console.log("worked!")
 }
 
-console.log(result)
-
-console.log("LUA Completed!")
