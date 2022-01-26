@@ -1,7 +1,12 @@
 [
     {
         "name": "test",
-        "type": "test",
+        "type": "Script",
         "path": "test.lua"
+    },
+    {
+        "name": "test2",
+        "type": "Module",
+        "path": "test2.lua"
     }
 ]
