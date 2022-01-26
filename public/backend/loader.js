@@ -6,6 +6,4 @@ Global.LuaLoader = main;
 
 await main.preloadScripts();
 
-Global.lol = "lol";
-
 main.executeScript("test");
