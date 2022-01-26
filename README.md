@@ -1,4 +1,4 @@
-![LuaGame](README_assets/banner.png)
+![LuaGame](README_assets/banner_alt.png)
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
