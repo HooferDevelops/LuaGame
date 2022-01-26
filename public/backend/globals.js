@@ -1,0 +1,3 @@
+let Global = {}
+
+export { Global }

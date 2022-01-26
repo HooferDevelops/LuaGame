@@ -1,5 +1,7 @@
 import { request } from "./request.js";
 import { makeGlobalFunctionList } from "./lua-util.js";
+import { test } from "./globals/game.js";
+import { execute, tableprint } from "./globals/util.js";
 
 const luaconf  = fengari.luaconf;
 const lua      = fengari.lua;
@@ -21,75 +23,13 @@ class LuaLoader{
 
         // create the global game state
         makeGlobalFunctionList(L, "game", {
-            "test": () => {
-                lua.lua_pushstring(L, "test");
-                console.log(_this.data)
-                console.log("!")
-
-                return 1;
-            }
+            "test": test
         })
 
         // create the global util state
         makeGlobalFunctionList(L, "util", {
-            "execute": (L) => {
-                let script = lua.lua_tojsstring(L, 1);
-                lauxlib.luaL_checktype(L, 1, lua.LUA_TSTRING);
-
-                let result = this.executeScript(script);
-                lua.lua_pushboolean(L, result);
-
-                return 1;
-            },
-            "tableprint": (L) => {
-                let table = lua.lua_settop(L, 1);
-                lauxlib.luaL_checktype(L, 1, lua.LUA_TTABLE);
-
-                
-                let print = (L, i=0) => {
-                    let result = {}
-
-                    lua.lua_pushvalue(L, -1-i);
-
-                    lua.lua_pushnil(L);
-
-                    while (lua.lua_next(L, -2) != 0) {
-                        lua.lua_pushvalue(L, -2);
-
-                        if (lua.lua_type(L, -2) == lua.LUA_TSTRING) {
-                            let key = lua.lua_tojsstring(L, -1);
-                            let value = lua.lua_tojsstring(L, -2);
-                            result[key] = value;
-                        } else if (lua.lua_type(L, -2) == lua.LUA_TNUMBER) {
-                            let key = lua.lua_tojsstring(L, -1);
-                            let value = lua.lua_tonumber(L, -2);
-                            result[key] = value;
-                        } else if (lua.lua_type(L, -2) == lua.LUA_TBOOLEAN) {
-                            let key = lua.lua_tojsstring(L, -1);
-                            let value = lua.lua_toboolean(L, -2);
-                            result[key] = value;
-                        } else if (lua.lua_type(L, -2) == lua.LUA_TTABLE) {
-                            let key = lua.lua_tojsstring(L, -1);
-                            let value = print(L, 1);
-
-                            result[key] = value;
-                        } else if (lua.lua_type(L, -2) == lua.LUA_TFUNCTION) {
-                            let key = lua.lua_tojsstring(L, -1);
-                            result[key] = "function";
-                        }
-                        
-                        lua.lua_pop(L, 2);
-                    }
-
-                    lua.lua_pop(L, 1);
-
-                    return result;
-                }
-
-                console.log(print(L));
-
-                return 1;
-            }
+            "execute": execute,
+            "tableprint": tableprint
         })
     }
 
