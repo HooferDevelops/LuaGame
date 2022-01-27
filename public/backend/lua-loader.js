@@ -72,22 +72,6 @@ class LuaLoader{
         let script = this.data.find(x => x.name === name);
 
         // execute the file
-        /*let loaded = lauxlib.luaL_loadstring(L, fengari.to_luastring(script.file));
-
-        if (loaded != 0) {
-            console.warn("error loading %s:\n %s", script.name, lua.lua_tojsstring(L, -1));
-            lua.lua_pop(L, 1);
-            return false;
-        }
-
-        loaded = lua.lua_resume(L, lua.lua_gettop(L) - 1, 0)
-
-        if (loaded != 0) {
-            console.warn("error loading %s:\n %s", script.name, lua.lua_tojsstring(L, -1));
-            lua.lua_pop(L, 1);
-            return false;
-        }*/
-
         let loaded = lauxlib.luaL_dostring(L, fengari.to_luastring(script.file));
 
         if (loaded != 0) {
