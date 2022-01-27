@@ -2,6 +2,7 @@ import { request } from "./request.js";
 import { makeGlobalFunctionList } from "./lua-util.js";
 import { test } from "./globals/game.js";
 import { execute, tableprint } from "./globals/util.js";
+import { newinstance } from "./globals/instance.js";
 
 const luaconf  = fengari.luaconf;
 const lua      = fengari.lua;
@@ -31,6 +32,11 @@ class LuaLoader{
             "execute": execute,
             "tableprint": tableprint
         })
+
+        // create the global instance state
+        makeGlobalFunctionList(L, "instance", {
+            "new": newinstance,
+        })
     }
 
     // preload all the scripts from the lua folder using the scripts.json file
@@ -39,7 +45,7 @@ class LuaLoader{
         let _this = this;
 
         return new Promise(async (res, rej) => {
-            const response = await request("GET", "/lua/game/scripts.json");
+            const response = await request("GET", "/game/lua/scripts.json");
             const scripts = JSON.parse(response);
 
             // loop through each script
@@ -50,7 +56,7 @@ class LuaLoader{
                 let type = information.type;
 
                 // make a request to get the file from the lua folder
-                const file = await request("GET", "/lua/game/" + path);
+                const file = await request("GET", "/game/lua/" + path);
 
                 // log it to console
                 console.warn("loaded " + path);
