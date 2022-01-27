@@ -39,7 +39,7 @@ class LuaLoader{
         let _this = this;
 
         return new Promise(async (res, rej) => {
-            const response = await request("GET", "/lua/scripts.json");
+            const response = await request("GET", "/lua/game/scripts.json");
             const scripts = JSON.parse(response);
 
             // loop through each script
@@ -50,7 +50,7 @@ class LuaLoader{
                 let type = information.type;
 
                 // make a request to get the file from the lua folder
-                const file = await request("GET", "/lua/" + path);
+                const file = await request("GET", "/lua/game/" + path);
 
                 // log it to console
                 console.warn("loaded " + path);
