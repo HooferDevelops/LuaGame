@@ -1,0 +1,31 @@
+{
+    "name": "Main Scene",
+    "children": [
+        {
+            "name": "TestCamera",
+            "type": "Camera",
+            
+            "position": [0, 0]
+        },
+        {
+            "name": "TestImage",
+            "type": "Image",
+
+            "position": [0, 0],
+            "size": [100, 100],
+            
+            "texture": "images/test.png"
+        },
+        {
+            "name": "TestText",
+            "type": "Text",
+
+            "position": [0, 0],
+            "text": "Hello World!",
+            
+            "font": "fonts/arial.ttf",
+            "fontSize": 20,
+            "color": [255, 255, 255]
+        }
+    ]
+}
