@@ -1,3 +1,8 @@
+# This repository & project is officially archived. I no longer believe that using Lua will be viable for the future of this project.
+## [As an alternative, I am working on a JavaScript web engine, which will not use Lua.](https://github.com/HooferDevelops/CanvasSquared)
+
+---
+
 ![LuaGame](README_assets/banner_alt.png)
 
 [![Contributors][contributors-shield]][contributors-url]
